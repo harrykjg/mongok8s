@@ -1,0 +1,14 @@
+kind: PersistentVolume #应该是用这里的例子，看他的解释： https://kubernetes.io/docs/tasks/configure-pod-container/configure-persistent-volume-storage/
+apiVersion: v1
+metadata:
+ name: mongo-pv
+ labels:
+  type: local #这个其实就是hostpath类型的pv了，只在测试时用
+spec:
+ storageClassName: manual2
+ capacity:
+  storage: 1Gi
+ accessModes:
+  - ReadWriteOnce
+ hostPath:
+  path: "/Users/zhuyu/github/RentalBilling/mongodata"

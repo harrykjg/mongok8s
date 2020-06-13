@@ -1,0 +1,11 @@
+kind: PersistentVolumeClaim 
+apiVersion: v1
+metadata:
+ name: mongo-pv-claim #这个pvc的名字
+spec:
+ storageClassName: manual2 #这个应该是对应persistentvolume的名字
+ accessModes:
+  - ReadWriteOnce
+ resources:
+  requests:
+   storage: 1Gi

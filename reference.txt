@@ -1,0 +1,7 @@
+https://leadwithoutatitle.wordpress.com/2018/03/05/how-to-deploy-mongodb-with-persistent-volume-in-kubernetes/
+
+https://stackoverflow.com/questions/56855264/mongo-setup-in-k8s-not-using-persistent-volume
+
+https://medium.com/@dilipkumar/standalone-mongodb-on-kubernetes-cluster-19e7b5896b27
+
+https://storagehub.vmware.com/t/vmware-vsan-tm-as-persistent-storage-for-mongodb-in-containers/vsan-as-persistent-storage-for-a-kubernetes-cluster/

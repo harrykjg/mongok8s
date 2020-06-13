@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet #这个大小写不对还不行！
+metadata:
+ name: mongo
+spec:
+  serviceName: "mongo-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+     labels:
+      app: mongo
+      selector: mongo
+    spec:
+      containers:
+      - name: mongo
+        image: mongo
+        imagePullPolicy: Always 
+        ports:
+         - containerPort: 27017
+        volumeMounts:
+         - name: mongo-persistent-volume2 #这个应该是对应下面的volumeClaimTemplates里的name
+           mountPath: /data/db #把这个路径mount到persistentVolumeClaim去
+      nodeSelector:
+          kubernetes.io/hostname: minikube #用kc get nodes知道自己的node是啥
+   # volumes:
+    #- name: mongo-persistent-volume
+     # persistentVolumeClaim:
+      #  claimName: mongo-pv-claim
+  volumeClaimTemplates: #provide stable storage using PersistentVolumes provisioned by a PersistentVolume Provisioner.https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#using-statefulsets
+                        #这个链接里貌似不需要额外定义pv和pvc，只有volumeClaimTemplates也行？还真是，他直接就创造了pv和pvc了.如果用pv和pvc的config去创造pv，pvc，然后在上面volumes那里引用也行！就不用volumeClaimTemplates了
+  - metadata:
+      name: mongo-persistent-volume2
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 5Gi

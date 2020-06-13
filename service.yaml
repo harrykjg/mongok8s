@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+ name: mongo-service
+ labels:
+  name: mongo
+spec:
+ ports:
+ - port: 27017
+   targetPort: 27017
+ #type: NodePort 用nodeport是为了把他expose 到k8s cluster之外的，但是这个mongo还是不能用我local的mongo compass之类的连，不知道为啥，用在mongojava上就可以
+ selector:
+  app: mongo #把label key为app，value为mongo的expose出去
